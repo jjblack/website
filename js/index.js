@@ -15,26 +15,21 @@ $(document).ready(function(e) {
       ["/help", "Show commands"],
       ["/list", "List all pages on the website"],
       ["/nav &lt;location&gt;", "Navigate to location"],
-	   ["/gl", "Generate a url for the current page - [^http://koya.io/](This doesn't work in an iframe, try it at *Koya.io*) outputs something like [^http://koya.io/connect](*koya.io/connect*)"],
       ["/clear", "Clear the console"],
-      ["/login &lt;username&gt; &lt;password&gt;", "Login to your account - This is not set up and when implemeneted it'll be '/login username' then request password without printing into the cmd prompt"],
-      ["/upload", "Upload file, must be logged in."]
    ];
    var previouscommands = [];
    var currentcommand = 0;
    var pages = [ /*Can be populated with various methods*/
-      ["index", "Welcome to Koya.io", "Simply, this is just a sandbox in which to add to; no real point - a couple of features that I plan to add though:", "URL shortner and open tracker, just enter a URL into the command line and press enter and you will get 2 links - 1 which looks like [http://koya.io/XXXXXX](http://koya.io/XXXXXX) and another [http://koya.io/u/XXXXXX](http://koya.io/u/XXXXXX) : they will both forward but the second will show a preview of the full url so they know where you are going.", "You can also save small messages with `/msg <string <160 chars>` and you will get a url like [http://koya.io/XXXXXX](http://koya.io/XXXXXX)","Pressing Ctrl+v will paste the short text or image and you will get a link.", "There will be accounts but likely given out rather than being able to register them whenever, this is a personal site so idk."],
-      ["about", "About Koya.io", "Personal power website for Finn 'Koya' Shackleton.", "Will include some features which too are mainly for personal use: Link shortner, image host, pastebin and any sandbox testing", "The colours have been taken from [https://github.com/Poorchop/darktooth-theme-ports/tree/8c852e8edde8df57d831dc8631493b0565fadbbc/hexchat-darktooth](Poorchop's Darktooth HexChat theme)", "In the process of turning the website into a server sided thing, currently what you can read is in the [http://koya.io/scripts.js](JavaScript file)!"],
-	  ["connect", "Connect with Koya",
-	  "[mailto:_@koya.io](Email _@koya.io)",
-	  "[skype:finn.shackleton](Skype)",
-	  "[^http://steamcommunity.com/id/bananabutterscotchmaplepancakes](Steam) < Always available",
-	  "[^https://codepen.io/OfficialAntarctica](Codepen)",
-	  "[^http://everybodyedits.com/profiles/bbmp](Everybody Edits)"]
+      ["index", "Welcome to jakeblack.io", "*/nav about* To see information about this site.", "*/nav connect* To see the ways to contact me."],
+      ["about", "About jakeblack.me", "Personal website for me, Jake Black", "The base layout of this website I pulled from [^https://codepen.io/z-/pen/eJNgWO](Koya on codepen.io)", "The html, javascript and css used for this site is hosted on [^https://github.com/tacofrog2/website](my github)", "I like this webiste design because it refelcts that I am an active Linux user and have learned to love working and living in the shell.", "Unfortunatly, because of this I am not very good at front-end, and this site does not work well on terminal browsers or mobile. :(", "I am looking for someone that can improve on this site and make the front-end better.", "I find back-end more interesting, so below is the details of this server", "Hosting: Digital Ocean", "Server type: Nginx", "OS: Centos 7", "SSL: Let's Encrypt",  "I apologize for any mistakes but if you see any please report it on github and I will fix it."],
+	  ["connect", "Connect with Me",
+	  "[mailto:jjblack@mtu.edu](Email jjblack@mtu.edu)",
+	  "",
+	  "[^http://steamcommunity.com/id/tacofrog2/home](Steam)"]
    ];
    var pageindex = ["index", "about", "connect"];
    var currentpage = "landing";
-   var url = "http://koya.io/"
+   var url = "https://jakeblack.me"
       /*
          Custom Text Syntax
          Links:      
@@ -51,13 +46,16 @@ $(document).ready(function(e) {
       setInterval(time);
       console.clear();
       console.log(new Date().getTime());
-      log("Website", "A! _____ _____ __ __ _____ ");
-      log("Website", "A!|  |  |     |  |  |  _  |");
-      log("Website", "A!|    -|  |  |_   _|     |");
-      log("Website", "A!|__|__|_____| |_| |__|__|");
-      log("Website", '[^http://koya.io/](*Koya.io*)');
+      log("Website", "A!    _       _        _     _            _                     ");
+      log("Website", "A!   (_)     | |      | |   | |          | |                    ");
+      log("Website", "A!    _  __ _| | _____| |__ | | __ _  ___| | __  _ __ ___   ___ ");
+      log("Website", "A!   | |/ _` | |/ / _ \ '_ \| |/ _` |/ __| |/ / | '_ ` _ \ / _ \");
+      log("Website", "A!   | | (_| |   <  __/ |_) | | (_| | (__|   < _| | | | | |  __/");
+      log("Website", "A!   | |\__,_|_|\_\___|_.__/|_|\__,_|\___|_|\_(_)_| |_| |_|\___|");
+      log("Website", "A!  _/ |                                                        ");
+      log("Website", "A! |__/                                                         ");
       log("Website", "");
-      log("Website", "E!I'm no longer using this at [^http://koya.io/](*Koya.io*)");
+      log("Website", "E!Welcome to jakeblack.me");
       log("Website", "");
 	  urlvars();
       log("Client", "For help say '/help'");
