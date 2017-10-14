@@ -15,26 +15,26 @@ $(document).ready(function(e) {
       ["/help", "Show commands"],
       ["/list", "List all pages on the website"],
       ["/nav &lt;location&gt;", "Navigate to location"],
-	   ["/gl", "Generate a url for the current page - [^http://koya.io/](This doesn't work in an iframe, try it at *Koya.io*) outputs something like [^http://koya.io/connect](*koya.io/connect*)"],
+	   ["/gl", "Generate a url for the current page - This isn't functioning right now. Will output something like [^http://jakeblack.me/connect](*jakeblack.me/connect*)"],
       ["/clear", "Clear the console"],
-      ["/login &lt;username&gt; &lt;password&gt;", "Login to your account - This is not set up and when implemeneted it'll be '/login username' then request password without printing into the cmd prompt"],
-      ["/upload", "Upload file, must be logged in."]
    ];
    var previouscommands = [];
    var currentcommand = 0;
    var pages = [ /*Can be populated with various methods*/
-      ["index", "Welcome to Koya.io", "Simply, this is just a sandbox in which to add to; no real point - a couple of features that I plan to add though:", "URL shortner and open tracker, just enter a URL into the command line and press enter and you will get 2 links - 1 which looks like [http://koya.io/XXXXXX](http://koya.io/XXXXXX) and another [http://koya.io/u/XXXXXX](http://koya.io/u/XXXXXX) : they will both forward but the second will show a preview of the full url so they know where you are going.", "You can also save small messages with `/msg <string <160 chars>` and you will get a url like [http://koya.io/XXXXXX](http://koya.io/XXXXXX)","Pressing Ctrl+v will paste the short text or image and you will get a link.", "There will be accounts but likely given out rather than being able to register them whenever, this is a personal site so idk."],
-      ["about", "About Koya.io", "Personal power website for Finn 'Koya' Shackleton.", "Will include some features which too are mainly for personal use: Link shortner, image host, pastebin and any sandbox testing", "The colours have been taken from [https://github.com/Poorchop/darktooth-theme-ports/tree/8c852e8edde8df57d831dc8631493b0565fadbbc/hexchat-darktooth](Poorchop's Darktooth HexChat theme)", "In the process of turning the website into a server sided thing, currently what you can read is in the [http://koya.io/scripts.js](JavaScript file)!"],
-	  ["connect", "Connect with Koya",
-	  "[mailto:_@koya.io](Email _@koya.io)",
-	  "[skype:finn.shackleton](Skype)",
-	  "[^http://steamcommunity.com/id/bananabutterscotchmaplepancakes](Steam) < Always available",
-	  "[^https://codepen.io/OfficialAntarctica](Codepen)",
-	  "[^http://everybodyedits.com/profiles/bbmp](Everybody Edits)"]
+      ["Ha, you found an example of how I'm bad with front-end"],
+      [/*index*/"Welcome to JakeBlack.me", "index - explains what you can find on each page", "experience - contains a link to my resumé and explains the projects I worked on for each employer", "proficiency - a list of what I know and am profienct in with a rating 1-10.", "projects - personal projects that I have completed on my own time", "about - contains information about this site", "connect - links to where you can find me and my work on the internet"],
+      [/*experience*/"About my work experience", "[^https://docs.google.com/document/d/10d3oULjjHupa9KN5z6lPurOPCe9jnhP6kVd5JMyjcMo/edit?usp=sharing](link to resumé)", "My projects at [^https://www.xes-inc.com/](Extreme Engineering Solutions) inlcude:" , "\xa0\xa0>private, internal mirror -  I used [^https://www.aptly.info/](Aptly) for this so we could publish our own internal packages in the same repository. We also used the snapshot function to have another mirror (with no extra storage taken) that was delayed on non-security updates for our critical servers to prevent broken packages from being served to them. I wrote a bash script that updated an republished the repository that was called by cron. I also wrote an ansible-playbook to deploy and reprovision this server." , "\xa0\xa0>upgrade [^https://fogproject.org/](FOG) server - We were using a very outdated version of FOG on outdated hardware. I set up a new server with an updated version of FOG and migrated in a way to maintain control of our hosts. At this time I also updated our Linux images. I also wrote an ansible-playbook to deploy and reporvision this server.", "\xa0\xa0>[^https://github.com/ansible/awx](AWX) - once RedHat open-sourced Ansible Tower with AWX, I set up an AWX server to use our current playbooks to manage our servers and Linux workstations.", "\xa0\xa0>Ansible-ize [^https://github.com/digitalocean/netbox](Netbox) - I was responsible for writing the playbook to deploy and reprovision our Netbox server.", "My work at [^http://us.coopertire.com/](Cooper Tire and Rubber Company) included:", "\xa0\xa0>[^https://www.microsoft.com/en-us/cloud-platform/system-center-configuration-manager](SCCM) - I used SCCM to create packages of software to deploy to workstations.", "\xa0\xa0>Helpdesk - My longest ticket was an Excel spreadsheet on an internal sharepoint site was not allowing a user to save changes made to it. A co-worker with the exact same permissions was able to save changes to it. The solution involved a lengthy support ticket with Microsoft. The result was Microsoft finding a bug with macros in Excel and issuing a patch. My most difficult ticket was a mobile workstation (laptop) was getting limited network connection when the wireless connection moved to a different AP. The issue was an invalid security token on the machine, but connection remained because the MAC was witelisted.", "\xa0\xa0>Discuss contract with vendors - Our hardware vendor contract was ending. I sat in on the conference to discuss new contract details with potential new vendors."], 
+      [/*proficiency*/"This is a list of my technical knowledge. The rating is what I give my knowledge about each item. 1 is `I have heard it mentioned in conversation` and 10 is `I am the lead developer`", "GNU/Linux - 5", "Ansible - 6", "polkit - 4", "lxc containers - 4", "Docker containers - 3", "Nginx and Apache - 3", "QEMU VMs - 4", "VMware/ESXi Virtualization - 4", "BASH - 6", "Python - 4", "Perl - 3", "Powershell - 4", "Windows Server 2008/2012 - 4", "Microsoft SCCM - 3", "Cisco IOS - 4", "Junos OS - 3", "FreeBSD - 2"], 
+      [/*projects*/"Current:", "\xa0\xa0>This website - I would consider this site still a work in progress.", "\xa0\xa0>pfSense router - I have an old Intel Core 2 Quad machine that I am working on installing pfSense and use it as a router", "\xa0\xa0>GPU passthru to VM - I am trying to use IOMMU grouping to exclusivly pass a physical graphics card to a VM. Reports indicate that this is easier than ever with recent AMD processors. A basic tutorial can be found [^https://level1techs.com/article/ryzen-gpu-passthrough-setup-guide-fedora-26-windows-gaming-linux](here) but I am running into some IOMMU grouping issues on my motherboard. When I get this working I want to use it to play games in a Windows VM hosted on Linux.", "\xa0\xa0>Wiki - I want to create a wiki server with MediaWiki or something similar to document my projects and how my servers are configured", "Completed:", "\xa0\xa0>VMhost - I have a Dell R710 with ESXi that I am using as a VM and container host for current and future projects. I plan on hosting all my internal servers on this that don't require many resources.", "\xa0\xa0>Linux as daily-driver - I use Fedora 26 on my personal computer. I currently dual-boot Windows for gaming purposes only."],
+      [/*about*/"About JakeBlack.me", "The style of this website came from [^https://codepen.io/z-/pen/eJNgWO](Koya on CodePen)", "The code that this website is using is available on my [^https://github.com/tacofrog2/website](Github)", "I enjoy the style of this site as it reflects that most of the work by a System Administrator is done in a terminal or shell.", "I am a System and Network Administrator, so front-end is not my expertise.", "Unfortunatly, because of my lack of experience in front-end, I am currently unable to make this site work well in a terminal browser.", "Ideally, this site would function just like a bash shell with tab completion, however history with [up] does function.", "My interest lies the back-end and management of the server, these details:", "Host: Digital Ocean droplet", "OS: CentOS 7", "HTTP Server: Nginx", "SSL: Let's Encrypt"],
+	  ["connect", "Connect with Me",
+	  "[mailto:jjblack@mtu.edu](Email jjblack@mtu.edu)",
+	  "[^https://github.com/tacofrog2/](Github)",
+	  "[^https://forum.level1techs.com/u/jblack/activity](Level1Techs Forums)"]
    ];
-   var pageindex = ["index", "about", "connect"];
+   var pageindex = ["Use `/nav [page]` to see each section", "index", "experience", "proficiency", "projects", "about", "connect"];
    var currentpage = "landing";
-   var url = "http://koya.io/"
+   var url = "http://jakeblack.me"
       /*
          Custom Text Syntax
          Links:      
@@ -51,13 +51,14 @@ $(document).ready(function(e) {
       setInterval(time);
       console.clear();
       console.log(new Date().getTime());
-      log("Website", "A! _____ _____ __ __ _____ ");
-      log("Website", "A!|  |  |     |  |  |  _  |");
-      log("Website", "A!|    -|  |  |_   _|     |");
-      log("Website", "A!|__|__|_____| |_| |__|__|");
-      log("Website", '[^http://koya.io/](*Koya.io*)');
-      log("Website", "");
-      log("Website", "E!I'm no longer using this at [^http://koya.io/](*Koya.io*)");
+      log("Website", "A!      _          _          ");
+      log("Website", "A!     | |        | |         ");
+      log("Website", "A!     | |  __ _  | | __  ___ ");
+      log("Website", "A! _   | | / _` | | |/ / / _ \\");
+      log("Website", "A!| |__| || ( ) | |   < | ___/");
+      log("Website", "A! \\____/  \\__,_| |_|\\_\\ \\___\\");
+      log("Website", "A!");
+      log("Website", '[^http://jakeblack.me](*JakeBlack.me*)');
       log("Website", "");
 	  urlvars();
       log("Client", "For help say '/help'");
