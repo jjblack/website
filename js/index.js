@@ -23,24 +23,24 @@ $(document).ready(function(e) {
    var pages = [ /*Can be populated with various methods*/
       ["Ha, you found an example of how I'm bad with front-end"],
       [/*index*/"Welcome to JakeBlack.me", "index - explains what you can find on each page", "experience - contains a link to my resumé", "proficiency - a list of what I know and am profienct in with a rating 1-10.", "projects - personal projects that I have completed on my own time", "about - contains information about this site", "connect - links to where you can find me and my work on the internet"],
-      [/*experience*/"About my work experience", "[^https://docs.google.com/document/d/10d3oULjjHupa9KN5z6lPurOPCe9jnhP6kVd5JMyjcMo/edit?usp=sharing](link to resumé)"], 
-      [/*proficiency*/"This is a list of my technical knowledge. The rating is what I give my knowledge about each item. 1 is `I have heard it mentioned in conversation` and 10 is `I am the lead developer`", "GNU/Linux - 5", "Ansible - 6", "polkit - 4", "lxc containers - 4", "Docker containers - 3", "Nginx and Apache - 3", "QEMU VMs - 4", "VMware/ESXi Virtualization - 4", "BASH - 6", "Python - 4", "Perl - 3", "Powershell - 4", "Windows Server 2008/2012 - 4", "Microsoft SCCM - 3", "Cisco IOS - 4", "Junos OS - 3", "FreeBSD - 2"], 
+      [/*experience*/"About my work experience", "[^https://docs.google.com/document/d/10d3oULjjHupa9KN5z6lPurOPCe9jnhP6kVd5JMyjcMo/edit?usp=sharing](link to resumé)"],
+      [/*proficiency*/"This is a list of my technical knowledge. The rating is what I give my knowledge about each item. 1 is `I have heard it mentioned in conversation` and 10 is `I am the lead developer`", "GNU/Linux - 5", "Ansible - 6", "polkit - 4", "lxc containers - 4", "Docker containers - 3", "Nginx and Apache - 3", "QEMU VMs - 4", "VMware/ESXi Virtualization - 4", "BASH - 6", "Python - 4", "Perl - 3", "Powershell - 4", "Windows Server 2008/2012 - 4", "Microsoft SCCM - 3", "Cisco IOS - 4", "Junos OS - 3", "FreeBSD - 2"],
       [/*projects*/"Current:", "\xa0\xa0>This website - I would consider this site still a work in progress.", "\xa0\xa0>pfSense router - I have an old Intel Core 2 Quad machine that I am working on installing pfSense and use it as a router", "\xa0\xa0>GPU passthru to VM - I am trying to use IOMMU grouping to exclusivly pass a physical graphics card to a VM. Reports indicate that this is easier than ever with recent AMD processors. A basic tutorial can be found [^https://level1techs.com/article/ryzen-gpu-passthrough-setup-guide-fedora-26-windows-gaming-linux](here) but I am running into some IOMMU grouping issues on my motherboard. When I get this working I want to use it to play games in a Windows VM hosted on Linux.", "\xa0\xa0>Wiki - I want to create a wiki server with MediaWiki or something similar to document my projects and how my servers are configured", "Completed:", "\xa0\xa0>VMhost - I have a Dell R710 with ESXi that I am using as a VM and container host for current and future projects. I plan on hosting all my internal servers on this that don't require many resources.", "\xa0\xa0>Linux as daily-driver - I use Fedora 26 on my personal computer. I currently dual-boot Windows for gaming purposes only."],
-      [/*about*/"About JakeBlack.me", "The style of this website came from [^https://codepen.io/z-/pen/eJNgWO](Koya on CodePen)", "The code that this website is using is available on my [^https://github.com/tacofrog2/website](Github)", "I enjoy the style of this site as it reflects that most of the work by a System Administrator is done in a terminal or shell.", "I am a System and Network Administrator, so front-end is not my expertise.", "Unfortunatly, because of my lack of experience in front-end, I am currently unable to make this site work well in a terminal browser.", "Ideally, this site would function just like a bash shell with tab completion, however history with [up] does function.", "My interest lies the back-end and management of the server, these details:", "Host: Digital Ocean droplet", "OS: CentOS 7", "HTTP Server: Nginx", "SSL: Let's Encrypt"],
+      [/*about*/"About JakeBlack.me", "The style of this website came from [^https://codepen.io/z-/pen/eJNgWO](Koya on CodePen)", "The code that this website is using is available on my [^https://github.com/jjblack/website](Github)", "I enjoy the style of this site as it reflects that most of the work by a System Administrator is done in a terminal or shell.", "I am a System and Network Administrator, so front-end is not my expertise.", "Unfortunatly, because of my lack of experience in front-end, I am currently unable to make this site work well in a terminal browser.", "Ideally, this site would function just like a bash shell with tab completion, however history with [up] does function.", "My interest lies the back-end and management of the server, these details:", "Host: Digital Ocean droplet", "OS: CentOS 7", "HTTP Server: Nginx", "SSL: Let's Encrypt"],
 	  ["connect", "Connect with Me",
 	  "[mailto:jjblack@mtu.edu](Email jjblack@mtu.edu)",
-	  "[^https://github.com/tacofrog2/](Github)",
-	  "[^https://forum.level1techs.com/u/jblack/activity](Level1Techs Forums)"]
+	  "[^https://github.com/jjblack/](Github)",
+	  "[^https://keybase.io/jjblack](keybase.io)"]
    ];
    var pageindex = ["Use `/nav [page]` to see each section", "index", "experience", "proficiency", "projects", "about", "connect"];
    var currentpage = "landing";
    var url = "http://jakeblack.me"
       /*
          Custom Text Syntax
-         Links:      
+         Links:
             [URLPATH](NAME) - regular
             [^URLPATH](NAME) - open in new tab
-            
+
          Styles:
             *TEXT* - bold text
             E! - Text is an error/notification
@@ -85,11 +85,11 @@ $(document).ready(function(e) {
                loadpage($.inArray(pageloc, pageindex));
             } else {
                //Un-note next line to show 404 errors with wrong urls
-               //log("Client", "404 - The page '" + pageloc + "' does not exist. To "); 
+               //log("Client", "404 - The page '" + pageloc + "' does not exist. To ");
             }
 		}
 		if(pageloc == "") {
-      		log("Client", "What would you like to access?");	
+      		log("Client", "What would you like to access?");
 		}
    }
    function getParam(name){
